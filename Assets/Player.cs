@@ -4,30 +4,28 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    private Rigidbody body;
     void Start()
     {
-        
+        body = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        Vector3 nextmove = new Vector3(transform.position.x,transform.position.y,transform.position.z); 
-        if (Input.GetKey(KeyCode.W))
-        {
-            nextmove.z  += moveSpeed * Time.deltaTime;
+        movement();
+    }
+
+    void movement()
+    {
+        if (Input.GetKey(KeyCode.W)){
+            body.linearVelocity = transform.forward * moveSpeed;
+        }else if (Input.GetKey(KeyCode.S)){
+            body.linearVelocity = transform.forward * -1 * moveSpeed;
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            nextmove.z -= moveSpeed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.A)){
+            body.linearVelocity = transform.right * -1 * moveSpeed;
+        }else if (Input.GetKey(KeyCode.D)){
+            body.linearVelocity = transform.right * moveSpeed;
         }
-        if (Input.GetKey(KeyCode.D))
-        {
-            nextmove.x  += moveSpeed * Time.deltaTime;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            nextmove.x -= moveSpeed * Time.deltaTime;
-        }
-        transform.position = nextmove;
     }
 }

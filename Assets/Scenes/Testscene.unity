@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveSpeed: 5
+  Xsens: 1
+  Ysens: 1
 --- !u!135 &474939847
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -254,7 +256,7 @@ Rigidbody:
   m_GameObject: {fileID: 474939845}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 20
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -431,7 +433,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d80594ff1dae314abf271eb9c92794c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::follower
-  seek: {fileID: 0}
+  seek: {fileID: 474939845}
+  Xsens: 1
+  Ysens: 1
 --- !u!114 &629877864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,7 +620,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7dec1ccf986930b419b7ef1f959ddfef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

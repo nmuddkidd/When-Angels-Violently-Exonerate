@@ -4,10 +4,16 @@ using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     public float moveSpeed = 5f;
+
     public float Xsens = 1f;
     public float Ysens = 1f;
+
     public float jumpvelocity = 20f;
     public float horizdamping = 10f;
+
+    public GameObject projectile;
+    public float projectilespeed = 20f;
+
     private Rigidbody body;
     private float yaw = 0;
     private float pitch = 0;
@@ -19,6 +25,12 @@ public class Player : MonoBehaviour
     void Update()
     {
         movement();
+        float xrotation = transform.eulerAngles.y * Mathf.PI/180;
+        float yrotation = transform.eulerAngles.x * Mathf.PI/180;
+        Debug.Log(transform.eulerAngles.y + " " + transform.eulerAngles.x);
+        if(Input.GetMouseButtonDown(0)){
+            Instantiate(projectile,new Vector3(transform.position.x + Mathf.Sin(xrotation),transform.position.y + Mathf.Sin(yrotation)*-1,transform.position.z + Mathf.Cos(xrotation)),Quaternion.Euler(0,0,0)).GetComponent<Rigidbody>().linearVelocity = new Vector3(projectilespeed * Mathf.Sin(xrotation), projectilespeed*Mathf.Sin(yrotation)*-1, projectilespeed * Mathf.Cos(xrotation));
+        }
     }
 
     void movement()
@@ -30,7 +42,6 @@ public class Player : MonoBehaviour
 
         //getting rotation for controls
         float xrotation = transform.eulerAngles.y * Mathf.PI/180;
-        Debug.Log(xrotation);
 
         //damping horizontal movement
         body.linearVelocity = new Vector3(body.linearVelocity.x - body.linearVelocity.x*Time.deltaTime / horizdamping ,body.linearVelocity.y,body.linearVelocity.z - body.linearVelocity.z * Time.deltaTime / horizdamping);

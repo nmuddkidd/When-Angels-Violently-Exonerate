@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,7 +30,7 @@ public class Player : MonoBehaviour
         float yrotation = transform.eulerAngles.x * Mathf.PI/180;
         Debug.Log(transform.eulerAngles.y + " " + transform.eulerAngles.x);
         if(Input.GetMouseButtonDown(0)){
-            Instantiate(projectile,new Vector3(transform.position.x + Mathf.Sin(xrotation),transform.position.y + Mathf.Sin(yrotation)*-1,transform.position.z + Mathf.Cos(xrotation)),Quaternion.Euler(0,0,0)).GetComponent<Rigidbody>().linearVelocity = new Vector3(projectilespeed * Mathf.Sin(xrotation), projectilespeed*Mathf.Sin(yrotation)*-1, projectilespeed * Mathf.Cos(xrotation));
+            Instantiate(projectile,transform.position,Quaternion.identity).GetComponent<Rigidbody>().linearVelocity = transform.rotation * Vector3.forward * projectilespeed; //new Vector3(projectilespeed * Mathf.Sin(xrotation), projectilespeed*Mathf.Sin(yrotation)*-1, projectilespeed * Mathf.Cos(xrotation));
         }
     }
 

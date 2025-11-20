@@ -158,7 +158,7 @@ MonoBehaviour:
   jumpvelocity: 5
   horizdamping: 0.01
   projectile: {fileID: 7319119076837906891, guid: 9fb99c36826fc7e4782a5f01d3913d89, type: 3}
-  projectilespeed: 50
+  projectilespeed: 10
 --- !u!135 &474939847
 SphereCollider:
   m_ObjectHideFlags: 0

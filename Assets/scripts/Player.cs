@@ -28,9 +28,13 @@ public class Player : MonoBehaviour
         movement();
         float xrotation = transform.eulerAngles.y * Mathf.PI/180;
         float yrotation = transform.eulerAngles.x * Mathf.PI/180;
-        Debug.Log(transform.eulerAngles.y + " " + transform.eulerAngles.x);
         if(Input.GetMouseButtonDown(0)){
-            Instantiate(projectile,transform.position,Quaternion.identity).GetComponent<Rigidbody>().linearVelocity = transform.rotation * Vector3.forward * projectilespeed; //new Vector3(projectilespeed * Mathf.Sin(xrotation), projectilespeed*Mathf.Sin(yrotation)*-1, projectilespeed * Mathf.Cos(xrotation));
+            Instantiate(projectile,transform.position,Quaternion.identity).GetComponent<Rigidbody>().linearVelocity = transform.rotation * Vector3.forward * projectilespeed;
+            GameObject.FindWithTag("gun").transform.localRotation *= quaternion.Euler(.349f,0,0);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            GameObject.FindWithTag("gun").transform.localRotation *= quaternion.Euler(-.349f,0,0);
         }
     }
 
@@ -65,7 +69,7 @@ public class Player : MonoBehaviour
             body.linearVelocity = new Vector3(moveSpeed * Mathf.Cos(xrotation), body.linearVelocity.y, -1 * moveSpeed * Mathf.Sin(xrotation));
         }
 
-        if(Input.GetKey(KeyCode.Space)){
+        if(Input.GetKey(KeyCode.Space)&&body.linearVelocity.y == 0){
             body.linearVelocity = new Vector3(body.linearVelocity.x, jumpvelocity , body.linearVelocity.z);
         }
     }

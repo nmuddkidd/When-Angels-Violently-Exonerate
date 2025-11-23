@@ -18,9 +18,15 @@ public class Player : MonoBehaviour
     private Rigidbody body;
     private float yaw = 0;
     private float pitch = 0;
+
+       [Header("Health")]
+    public int maxHealth = 100;
+    private int currentHealth;
+
     void Start()
     {
         body = GetComponent<Rigidbody>();
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -73,4 +79,20 @@ public class Player : MonoBehaviour
             body.linearVelocity = new Vector3(body.linearVelocity.x, jumpvelocity , body.linearVelocity.z);
         }
     }
+
+    public void TakeDamage(int damage)
+        {
+            currentHealth -= damage;
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+        }
+
+    public void Die()
+        {
+            Destroy(gameObject);
+            WaitForSeconds wait = new WaitForSeconds(2);
+        }
+    
 }

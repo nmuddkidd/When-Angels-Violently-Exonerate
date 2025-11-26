@@ -34,11 +34,6 @@ public class Enemy : MonoBehaviour
                 StartCoroutine(RespawnAfterDelay());
             }
         }
-
-    /*public void Die()
-        {
-            StartCoroutine(RespawnAfterDelay());
-        }*/
     
     private IEnumerator RespawnAfterDelay()
         {
